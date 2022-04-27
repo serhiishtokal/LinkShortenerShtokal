@@ -1,6 +1,6 @@
 ﻿namespace LinkShortenerShtokal.Queries.Base
 {
-    public interface IQuery<TResult> where TResult : IQueryResult
+    public interface IQuery<TResult> /*where TResult : IQueryResult*/
     {
 
     }

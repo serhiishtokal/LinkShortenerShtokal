@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LinkShortenerShtokal.Controllers
 {
     [ApiController]
-    [Route("")]
+    [Route("/r")]
     public class RedirectController : Controller
     {
         private readonly IQueryDispatcher _queryDispatcher;
@@ -21,15 +21,12 @@ namespace LinkShortenerShtokal.Controllers
             _commandDispatcher = commandDispatcher;
         }
 
-        [HttpGet("{urlAlias}", Name = "GetWeatherForecast")]
+        [HttpGet("{urlAlias}")]
         public async Task<IActionResult> GetAsync(string urlAlias)
         {
             var command = new GetOriginalUrlCommand(urlAlias);
             var result = await _commandDispatcher.DispatchAsync<GetOriginalUrlCommand, GetOriginalUrlCommandResult>(command);
             return Redirect(result.OriginalUrl);
-
         }
-
-
     }
 }

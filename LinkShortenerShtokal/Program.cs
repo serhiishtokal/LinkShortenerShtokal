@@ -2,6 +2,7 @@ using LinkShortenerShtokal.Commands.Base;
 using LinkShortenerShtokal.Commands.Url.AddUrl;
 using LinkShortenerShtokal.Commands.Url.DeleteUrl;
 using LinkShortenerShtokal.Commands.Url.RedirectToOriginalUrl;
+using LinkShortenerShtokal.Core.Models;
 using LinkShortenerShtokal.Infrastructure.EF;
 using LinkShortenerShtokal.Infrastructure.Services;
 using LinkShortenerShtokal.Infrastructure.Settings;
@@ -47,7 +48,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<ICommandHandler<AddUrlCommand, AddUrlResult>, AddUrlHandler>();
 builder.Services.AddTransient<ICommandHandler<GetOriginalUrlCommand, GetOriginalUrlCommandResult>, GetOriginalUrlCommandHandler>();
 builder.Services.AddTransient<ICommandHandler<GetOriginalUrlCommand, GetOriginalUrlCommandResult>, GetOriginalUrlCommandHandler>();
-builder.Services.AddTransient<IQueryHandler<GetAllUrlsStatisticQuery, GetAllUrlsStatisticResult>, GetAllUrlsStatisticHandler>();
+builder.Services.AddTransient<IQueryHandler<GetAllUrlsStatisticQuery, List<ShortenedUrlDto>>, GetAllUrlsStatisticHandler>();
 builder.Services.AddTransient<ICommandHandler<DeleteUrlCommand, DeleteUrlCommandResult>, DeleteUrlHandler>();
 
 var app = builder.Build();

@@ -1,0 +1,58 @@
+<div>
+    <form [formGroup]="form">
+        <p>Create shortened url!</p>
+        <input [formControlName]="'url'" type="text">
+        <button (click)="addNewUrlClicked()">Create!</button>
+        
+    </form>
+    <div style="display: flex;flex-direction: column; ">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Index
+                    </th>
+                    <th>
+                        Original Url
+                    </th>
+                    <th>
+                        Shortened Url
+                    </th>
+                    <th>
+                        Creation date
+                    </th>
+                    <th>
+                        NumberOfUsages
+                    </th>
+                    <th>
+                        Delete
+                    </th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr *ngFor="let url of shortenedUrls; let idx = index;">
+                    <td><p>{{idx}}</p></td>
+                    <td><a [href]="url.originalUrl" target="_blank" rel="noopener noreferrer">{{url.originalUrl}}</a></td>
+                    <td><a [href]="baseRedirectUrl +'/' + url.urlAlias" target="_blank" rel="noopener noreferrer">{{baseRedirectUrl +'/' + url.urlAlias}}</a></td>
+                    <td>{{url.createdAt}}</td>
+                    <td>{{url.numberOfUsages}}</td>
+                    <td><button (click)="deleteClicked(idx)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <div *ngFor="let url of shortenedUrls; let idx = index;" style="display: flex;flex-direction: row;">
+            <div style="flex-grow: 1">
+                <p>{{idx}}</p>
+            </div>
+            <div style="flex-grow: 4">
+                <a [href]="url.originalUrl">{{url.originalUrl}}</a>
+                <a [href]="baseRedirectUrl +'/' + url.urlAlias">{{baseRedirectUrl +'/' + url.urlAlias}}</a>
+            </div>
+           <div style="flex-grow: 1">
+                <button (click)="deleteClicked(idx)">Delete</button>
+           </div>
+            
+        </div> -->
+    </div>
+</div>

@@ -4,6 +4,7 @@
     {
         Task<TQueryResult> QueryAsync<TQuery, TQueryResult>(TQuery command)
             where TQuery : IQuery<TQueryResult>
-            where TQueryResult : IQueryResult;
+            //where TQueryResult : IQueryResult
+            ;
     }
 }

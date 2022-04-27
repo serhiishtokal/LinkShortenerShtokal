@@ -1,13 +1,11 @@
 ﻿using LinkShortenerShtokal.Commands.Base;
 using LinkShortenerShtokal.Commands.Url.AddUrl;
 using LinkShortenerShtokal.Commands.Url.DeleteUrl;
-using LinkShortenerShtokal.Core.Domain;
-using LinkShortenerShtokal.Infrastructure.EF;
+using LinkShortenerShtokal.Core.Models;
 using LinkShortenerShtokal.Queries.Base;
 using LinkShortenerShtokal.Queries.ShortenedUrls.GetAllUrlsStatistic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
+using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,15 +23,15 @@ namespace LinkShortenerShtokal.Controllers
             _queryDispatcher = queryDispatcher;
         }
 
-        // GET: api/<ValuesController>
         [HttpGet(nameof(GetAll))]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _queryDispatcher.QueryAsync<GetAllUrlsStatisticQuery, GetAllUrlsStatisticResult>(new GetAllUrlsStatisticQuery());
-             return Json(result);
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName()); // `Dns.Resolve()` method is deprecated.
+            IPAddress ipAddress = ipHostInfo.AddressList[0];
+            var result = await _queryDispatcher.QueryAsync<GetAllUrlsStatisticQuery, List<ShortenedUrlDto>>(new GetAllUrlsStatisticQuery());
+            return Json(result);
         }
 
-        // POST api/<ValuesController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] string url)
         {

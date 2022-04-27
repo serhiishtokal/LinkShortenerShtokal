@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using LinkShortenerShtokal.Core.Domain;
+using LinkShortenerShtokal.Core.Models;
 using LinkShortenerShtokal.Infrastructure.EF;
 using LinkShortenerShtokal.Queries.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace LinkShortenerShtokal.Queries.ShortenedUrls.GetAllUrlsStatistic
 {
-    public class GetAllUrlsStatisticHandler : IQueryHandler<GetAllUrlsStatisticQuery, GetAllUrlsStatisticResult>
+    public class GetAllUrlsStatisticHandler : IQueryHandler<GetAllUrlsStatisticQuery, List<ShortenedUrlDto>>
     {
         private readonly IQueryable<ShortenedUrl> _shortenedUrlsQuery;
         private readonly IMapper _mapper;
@@ -17,11 +18,11 @@ namespace LinkShortenerShtokal.Queries.ShortenedUrls.GetAllUrlsStatistic
             _mapper = mapper;
         }
 
-        public async Task<GetAllUrlsStatisticResult> HandleAsync(GetAllUrlsStatisticQuery query)
+        public async Task<List<ShortenedUrlDto>> HandleAsync(GetAllUrlsStatisticQuery query)
         {
             var activeShortenedUrls = await _shortenedUrlsQuery.Where(x => !x.IsDeleted).ToListAsync();
             var results = _mapper.Map<List<ShortenedUrlDto>>(activeShortenedUrls);
-            return new GetAllUrlsStatisticResult() { ShortenedUrlDtos = results };
+            return results;
         }
     }
 }

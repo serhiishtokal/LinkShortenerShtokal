@@ -25,8 +25,7 @@ namespace LinkShortenerShtokal.Commands.Url.DeleteUrl
             {
                 throw new ArgumentException();
             }
-            _context.Remove(shortenedUrl);
-
+            shortenedUrl.IsDeleted = true;
             return new DeleteUrlCommandResult();
         }
     }

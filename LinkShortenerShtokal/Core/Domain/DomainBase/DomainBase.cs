@@ -8,7 +8,7 @@ namespace LinkShortenerShtokal.Core.Domain
         [Key]
         public Guid Id { get; set; }
         public DateTime CreatedAt { get; set; }
-        public virtual bool IsDeleted { get; protected set; }
+        public virtual bool IsDeleted { get; set; }
 
         protected DomainBase()
         {

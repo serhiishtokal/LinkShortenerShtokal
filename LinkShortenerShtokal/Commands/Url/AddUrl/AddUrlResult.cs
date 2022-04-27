@@ -1,9 +1,10 @@
 ﻿using LinkShortenerShtokal.Commands.Base;
+using LinkShortenerShtokal.Core.Models;
 
 namespace LinkShortenerShtokal.Commands.Url.AddUrl
 {
-    public class AddUrlResult: ICommandResult
+    public class AddUrlResult: ShortenedUrlDto, ICommandResult
     {
-        public string UrlAlias { get; set; }
+
     }
 }

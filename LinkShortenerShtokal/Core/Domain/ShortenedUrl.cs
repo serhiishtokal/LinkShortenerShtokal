@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LinkShortenerShtokal.Core.Domain
 {
@@ -12,7 +11,7 @@ namespace LinkShortenerShtokal.Core.Domain
         public int NumberOfUsages { get; set; }
 
         public ShortenedUrl(string originalUrl)
-        { 
+        {
             OriginalUrl = originalUrl;
         }
     }
